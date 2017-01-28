@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Scriptar</title>
-		<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+			{% block head %}
+				<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+				<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+				<title>{% block title %}{% endblock %} - My Webpage</title>
+			{% endblock %}
 	</head>
 
 	<body>
+		<div id="container">
+			<div id="content">{% block content %}{% endblock %}</div>
+			<div id="footer">
+				{% block footer %}
+				&copy; Copyright 2017 by <a href="http://xor.noip.me/">Scriptar</a>.
+				{% endblock %}
+			</div>
+		</div>
 	</body>
 </html>

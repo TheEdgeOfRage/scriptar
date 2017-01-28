@@ -1,4 +1,12 @@
-<div class="container">
+{% extends "layout.html" %}
+	{% block title %}Index{% endblock %}
+{% block head %}
+	{{ super() }}
+	<style type="text/css">
+		.important { color: #336699; }
+	</style>
+{% endblock %}
+{% block content %}
 	<div class="header">
 		<nav>
 			<ul class="nav nav-pills pull-right">
@@ -14,7 +22,7 @@
 	</div>
 
 	<div class="jumbotron">
-		<h1>Bucket List App</h1>
+		<h1>Scriptar</h1>
 		<p class="lead"></p>
 		<p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up today</a>
 		</p>
@@ -44,8 +52,4 @@
 		</div>
 	</div>
 
-	<footer class="footer">
-		<p>&copy; Company 2015</p>
-	</footer>
-</div>
-
+{% endblock %}
