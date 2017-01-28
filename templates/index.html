@@ -12,9 +12,9 @@
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation" class="active"><a href="#">Home</a>
 				</li>
-				<li role="presentation"><a href="#">Sign In</a>
+				<li role="presentation"><a href="{{ url_for('login') }}">Log in</a>
 				</li>
-				<li role="presentation"><a href="showSignUp">Sign Up</a>
+				<li role="presentation"><a href="{{ url_for('signup') }}">Sign up</a>
 				</li>
 			</ul>
 		</nav>
@@ -24,7 +24,7 @@
 	<div class="jumbotron">
 		<h1>Scriptar</h1>
 		<p class="lead"></p>
-		<p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up today</a>
+		<p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a>
 		</p>
 	</div>
 
