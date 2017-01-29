@@ -12,12 +12,11 @@
 
 import os
 from flask import Flask, request, session, render_template, redirect, url_for
-from flaskext.mysql import MySQL
+import mysql.connector
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
-mysql = MySQL()
-mysql.init_app(app)
+mysql_con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
 
 @app.route('/')
 def index():
@@ -31,11 +30,16 @@ def signup():
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        cursor = mysql.get_db().cursor()
+        cur = mysql_con.cursor()
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         name = request.form['name']
+        cur.execute("INSERT INTO Users (username, email, password, name) VALUES (%s, %s, %s, %s, %s)", username, email, password, name)
+        mysql_con.commit()
+        cur.close()
+        mysql_con.close()
+        return redirect(url_for('signup'))
 
 
 @app.route('/login')
