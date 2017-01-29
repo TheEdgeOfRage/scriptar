@@ -90,3 +90,6 @@ ENV/
 
 # Ignore vim swp files
 *.swp
+
+# Ignore uploads
+static/uploads/

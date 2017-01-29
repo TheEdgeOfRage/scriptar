@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Uploads{% endblock %}
+
+{% block content %}
+<div class="header">
+	<nav>
+		<ul class="nav nav-pills pull-right">
+			<li role="presentation"><a href="{{ url_for('index') }}">Home</a>
+			</li>
+			<li role="presentation"><a href="{{ url_for('login') }}">Log in</a>
+			</li>
+			<li role="presentation"><a href="{{ url_for('signup') }}">Sign up</a>
+			</li>
+		</ul>
+	</nav>
+	<h3 class="text-muted">Scriptar</h3>
+</div>
+
+<div class="jumbotron">
+	<h1>Uploaded files</h1>
+	{% if files %}
+	{% for file in files %}
+	<p><a href="static/uploads/{{ file }}"><img src="static/uploads/{{ file }}" alt="{{ file }}" /></a></p>
+	{% endfor %}
+	{% else %}
+	<p>There are no files</p>
+	{% endif %}
+</div>
+{% endblock %}

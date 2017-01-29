@@ -13,6 +13,7 @@
 import os
 from flask import Flask, request, session, render_template, redirect, url_for
 import mysql.connector
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -28,6 +29,7 @@ def close_db(db, cur):
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -49,9 +51,11 @@ def signup():
         return redirect(url_for('signup'))
 
 
+
 @app.route('/login')
 def login():
     return render_template('login.html')
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def file_upload():
@@ -61,9 +65,22 @@ def file_upload():
         else:
             return render_template('file_upload.html')
     elif request.method == 'POST':
-        f = request.files['file']
-        f.save('/srv/http/scriptar/uploads/uploaded_file.txt')
-        return redirect(url_for('index'))
+
+        if 'file0' not in request.files:
+            return redirect(url_for('file_upload'))
+
+        for f in request.files:
+            if request.files[f].filename != '' and f:
+                filename = secure_filename(request.files[f].filename)
+                request.files[f].save(os.path.join('/srv/http/scriptar/static/uploads', filename))
+        return 'kurac'
+
+
+@app.route('/list_uploads')
+def list_uploads():
+    files = os.listdir('static/uploads/')
+    return render_template('list_uploads.html', files=files)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
