@@ -106,11 +106,14 @@ def file_upload():
         cur = db.cursor()
         print("1")
 
-        subject = request.form['subject']
-        user = session['user']
+        # subject = request.form['subject']
+        # user = session['user']
+        subject = '1'
+        user = '6'
         script_name = request.form['script_name']
-        # link = request.form['link']
         description = request.form['description']
+        # link = request.form['link']
+
         print("2")
 
         file_path_base = ''.join('/srv/nginx/flask/scriptar/static/uploads/', script_name)
@@ -124,7 +127,7 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
+                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
 
         print("4")
         db.commit()
