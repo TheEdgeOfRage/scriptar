@@ -33,7 +33,10 @@ def signup():
     elif request.method == 'POST':
         cursor = mysql.get_db().cursor()
         username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
+        name = request.form['name']
+
 
 @app.route('/login')
 def login():
