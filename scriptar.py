@@ -131,7 +131,7 @@ def file_upload():
 
 
 @app.route('/list_uploads/<script_name>')
-def list_uploads():
+def list_uploads(script_name):
     files = os.listdir('static/uploads/%s/' % script_name)
     return render_template('list_uploads.html', files=files)
 
