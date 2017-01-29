@@ -63,10 +63,15 @@ def login():
         cur = db.cursor()
         username = request.form['username']
         password = request.form['password']
-        cur.execute('SELECT * from User WHERE username="%s"' % (username,))
+        cur.execute('SELECT password from User WHERE username="%s"' % (username,))
         app.logger.debug(cur)
-        return "arst"
-        # if argon2.verify(password,
+        print(cur)
+        for password_db in cur:
+            if argon2.verify(password, password_db):
+                session['user'] = username
+                return redirect(url_for('index'))
+            else:
+                return redirect(url_for('login'))
 
 
 @app.route('/upload', methods=['GET', 'POST'])
