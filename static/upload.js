@@ -1,14 +1,9 @@
 $('#submit-file-upload').on('click', function (event){
     event.preventDefault();
-    //$('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
-// });
-
-// $('#upload-input').on('change', function(){
 
     var files = $("#upload-input").get(0).files;
-    alert(files.length)
     if (files.length > 0){
         var formData = new FormData();
 
@@ -20,8 +15,7 @@ $('#submit-file-upload').on('click', function (event){
 
         formData.append('script_name', $("#script_name").val());
         formData.append('description', $("#description").val());
-        alert("doso ovde")
-    
+
         $.ajax({
             url: '/upload',
             type: 'POST',
