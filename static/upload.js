@@ -1,6 +1,6 @@
 $('#submit-file-upload').on('click', function (event){
     event.preventDefault();
-    $('#upload-input').click();
+    //$('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
 // });
