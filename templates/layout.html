@@ -11,7 +11,20 @@
 
 	<body>
 		<div class="container">
+			<div class="header">
+				<nav>
+					<ul class="nav nav-pills pull-right">
+						{{ nav_link('index', 'Home') }}
+						{{ nav_link('login', 'Log in') }}
+						{{ nav_link('signup', 'Sign up') }}
+						{{ nav_link('file_upload', 'Upload') }}
+					</ul>
+				</nav>
+				<a href="{{ url_for('index') }}"><h3 class="text-muted">Scriptar</h3></a>
+			</div>
+
 			<div id="content">{% block content %}{% endblock %}</div>
+
 			<div id="footer">
 				{% block footer %}
 					&copy; Copyright 2017 by <a href="http://xor.noip.me/">Scriptar</a>.

@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
-{% extends "navbar.html" %}
 
 {% block title %}Uploads{% endblock %}
 
 {% block content %}
-	{% block navbar %} {{ super() }} {% endblock %}
 	<div class="jumbotron">
 		<h1>Uploaded files</h1>
 		{% if dirs %}
