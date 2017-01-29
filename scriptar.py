@@ -67,9 +67,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cur.execute('SELECT password from User WHERE username="%s"' % (username,))
-        app.logger.debug(cur)
-        print(cur)
-        for password_db in cur:
+        for (password_db) in cur:
             if argon2.verify(password, password_db):
                 session['user'] = username
                 return redirect(url_for('index'))
