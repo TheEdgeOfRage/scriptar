@@ -11,7 +11,7 @@
 """
 
 import os
-from flask import Flask, request, session, render_template
+from flask import Flask, request, session, render_template, redirect, url_for
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
@@ -25,18 +25,30 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method() == 'GET':
-        if session['user'] == None:
+    if request.method == 'GET':
+        if not 'user' in session:
             return render_template('signup.html')
         else:
             return redirect(url_for('index'))
-    elif request.method() == 'POST':
+    elif request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/upload', methods=['GET', 'POST'])
+def file_upload():
+    if request.method == 'GET':
+        if 'user' in session:
+            return redirect(url_for('index'))
+        else:
+            return render_template('file_upload.html')
+    # elif request.method == 'POST':
+        # username = request.form['username']
+        # password = request.form['password']
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
