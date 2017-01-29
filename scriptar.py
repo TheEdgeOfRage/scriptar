@@ -114,6 +114,7 @@ def file_upload():
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', script_name])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
+        print(request.files)
         for f in request.files:
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
