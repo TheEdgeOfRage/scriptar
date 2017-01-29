@@ -130,6 +130,12 @@ def file_upload():
         return 'kurac'
 
 
+@app.route('/list_uploads')
+def list_upload_dirs():
+    dirs = os.listdir('/static/uploads/')
+    return render_template('list_upload_dirs.html', dirs=dirs)
+
+
 @app.route('/list_uploads/<script_name>')
 def list_uploads(script_name):
     files = os.listdir('static/uploads/%s/' % script_name)
