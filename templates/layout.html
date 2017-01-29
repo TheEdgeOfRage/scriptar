@@ -1,27 +1,27 @@
+{% extends "navbar.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-			{% block head %}
-				<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-				<link href="/static/style.css" rel="stylesheet">
-				<link rel="shortcut icon" type="image/png" href="static/favicon.png"/>
-				<title>{% block title %}{% endblock %}</title>
-			{% endblock %}
+		{% block head %}
+			<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+			<link href="/static/style.css" rel="stylesheet">
+			<link rel="shortcut icon" type="image/png" href="static/favicon.png"/>
+			<title>{% block title %}{% endblock %}</title>
+		{% endblock %}
 	</head>
 
 	<body>
 		<div class="container">
+			{% block navbar %} {{ super() }} {% endblock %}
 			<div id="content">{% block content %}{% endblock %}</div>
 			<div id="footer">
 				{% block footer %}
-				&copy; Copyright 2017 by <a href="http://xor.noip.me/">Scriptar</a>.
+					&copy; Copyright 2017 by <a href="http://xor.noip.me/">Scriptar</a>.
 				{% endblock %}
 			</div>
 		</div>
-		<script
-			  src="https://code.jquery.com/jquery-3.1.1.min.js"
-			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-			  crossorigin="anonymous"></script>
-		<script type="text/javascript" src="/static/upload.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		{% block js %}{% endblock %}
 	</body>
 </html>

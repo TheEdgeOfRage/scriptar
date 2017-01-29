@@ -1,32 +1,16 @@
 {% extends "layout.html" %}
-	{% block title %}Index{% endblock %}
+
+{% block title %}Index{% endblock %}
 {% block head %}
 	{{ super() }}
-	<style type="text/css">
-		.important { color: #336699; }
-	</style>
 {% endblock %}
+
 {% block content %}
-	<div class="header">
-		<nav>
-			<ul class="nav nav-pills pull-right">
-				<li role="presentation" class="active"><a href="#">Home</a>
-				</li>
-				<li role="presentation"><a href="{{ url_for('login') }}">Log in</a>
-				</li>
-				<li role="presentation"><a href="{{ url_for('signup') }}">Sign up</a>
-				</li>
-				<li role="presentation"><a href="{{ url_for('file_upload') }}">Upload</a>
-				</li>
-			</ul>
-		</nav>
-		<h3 class="text-muted">Python Flask App</h3>
-	</div>
 
 	<div class="jumbotron">
 		<h1>Scriptar</h1>
 		<p class="lead"></p>
-		<p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a>
+		<p><a class="btn btn-lg btn-success" href="{{ url_for('list_uploads') }}" role="button">List uploads</a>
 		</p>
 	</div>
 
@@ -54,4 +38,8 @@
 		</div>
 	</div>
 
+{% endblock %}
+
+{% block js %}
+	<script>$('#nav_index').addClass('active')</script>
 {% endblock %}
