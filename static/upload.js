@@ -18,8 +18,8 @@ $('#submit-file-upload').on('click', function (event){
             formData.append('file' + i, file, file.name);
         }
 
-        // formData.append('script_name', $("#script_name").value());
-        // formData.append('description', $("#description").value());
+        formData.append('script_name', $("#script_name").val());
+        formData.append('description', $("#description").val());
         alert("doso ovde")
     
         $.ajax({
