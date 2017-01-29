@@ -62,7 +62,7 @@ def file_upload():
         return 'kurac'
 
 
-@app.route('list_uploads')
+@app.route('/list_uploads')
 def list_uploads():
     files = os.listdir()
     return render_template('list_uploads.html', files=files)
