@@ -20,7 +20,7 @@
 	<h1>Uploaded files</h1>
 	{% if dirs %}
 	{% for dir in dirs %}
-	<p><a href="/static/uploads/{{ dir }}">{{ dir }}</a></p>
+	<p><a href="/list_uploads/{{ dir }}">{{ dir }}</a></p>
 	{% endfor %}
 	{% else %}
 	<p>There are no files</p>
