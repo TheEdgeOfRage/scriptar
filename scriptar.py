@@ -13,6 +13,7 @@
 import os
 from flask import Flask, request, session, render_template, redirect, url_for
 from flaskext.mysql import MySQL
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
