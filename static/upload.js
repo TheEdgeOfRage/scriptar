@@ -8,7 +8,7 @@ $('#submit-file-upload').on('click', function (event){
 // $('#upload-input').on('change', function(){
 
     var files = $("#upload-input").get(0).files;
-    alert($("#upload-input").get(0).files)
+    alert(files.length)
     if (files.length > 0){
         var formData = new FormData();
 
