@@ -106,7 +106,7 @@ def file_upload():
         cur = db.cursor()
 
         subject = request.form['subject']
-        user = request.session['user']
+        user = session['user']
         script_name = request.form['script_name']
         # link = request.form['link']
         description = request.form['description']
