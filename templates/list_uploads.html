@@ -19,11 +19,9 @@
 <div class="jumbotron">
 	<h1>Uploaded files</h1>
 	{% if files %}
-	<ul>
-		{% for file in files %}
-		<li><a href="static/uploads/{{ file }}"><img src="static/uploads/{{ file }}" alt="{{ file }}" /></a></li>
-		{% endfor %}
-	</ul>
+	{% for file in files %}
+	<p><a href="static/uploads/{{ file }}"><img src="static/uploads/{{ file }}" alt="{{ file }}" /></a></p>
+	{% endfor %}
 	{% else %}
 	<p>There are no files</p>
 	{% endif %}
