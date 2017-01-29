@@ -104,16 +104,19 @@ def file_upload():
 
         db = init_db()
         cur = db.cursor()
+        print("1")
 
         subject = request.form['subject']
         user = session['user']
         script_name = request.form['script_name']
         # link = request.form['link']
         description = request.form['description']
+        print("2")
 
         file_path_base = ''.join('/srv/nginx/flask/scriptar/static/uploads/', script_name)
 
         for f in request.files:
+            print("3")
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
                 # extension = filename.rsplit('.', 1)[1].lower()
@@ -123,6 +126,7 @@ def file_upload():
                 request.files[f].save(os.path.join(file_path))
                 cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
 
+        print("4")
         db.commit()
         close_db(db, cur)
         print("uspesno postao peder")
