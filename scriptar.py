@@ -48,25 +48,15 @@ def file_upload():
         else:
             return render_template('file_upload.html')
     elif request.method == 'POST':
-        # uploaded_files = request.files['file']
-        # for file in uploaded_files:
-        #     file.save('/srv/http/scriptar/uploads/uploaded_file.txt')
-        # return redirect(url_for('index'))
 
-        if 'file' not in request.files:
+        if 'file0' not in request.files:
             return redirect(url_for('file_upload'))
-        file = request.files['file']
         
-        for f in file:
-            print("\n\n",f,"\n\n")
-            if f.filename != '' and f:
-                filename = secure_filename(f.filename)
-                f.save(os.path.join('/srv/http/scriptar/uploads/', filename))
+        for f in request.files:
+            if request.files[f].filename != '' and f:
+                filename = secure_filename(request.files[f].filename)
+                request.files[f].save(os.path.join('/srv/http/scriptar/uploads', filename))
         return 'kurac'
-
-
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
