@@ -48,8 +48,8 @@ def signup():
         cur.execute("INSERT INTO Users (username, email, password, name) VALUES (%s, %s, %s, %s, %s)", username, email, password, name)
         db.commit()
         close_db(db, cur)
-        return redirect(url_for('signup'))
-
+        app.logger.debug("Sucessfully added user")
+        return redirect(url_for('index'))
 
 
 @app.route('/login')
