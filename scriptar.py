@@ -132,7 +132,7 @@ def file_upload():
 
 @app.route('/list_uploads')
 def list_upload_dirs():
-    dirs = os.listdir('/static/uploads/')
+    dirs = os.listdir('static/uploads/')
     return render_template('list_upload_dirs.html', dirs=dirs)
 
 
