@@ -45,10 +45,9 @@ def file_upload():
             return redirect(url_for('index'))
         else:
             return render_template('file_upload.html')
-    # elif request.method == 'POST':
-        # username = request.form['username']
-        # password = request.form['password']
-
+    elif request.method == 'POST':
+        f = request.files['file']
+        f.save('/var/www/uploads/uploaded_file.txt')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
