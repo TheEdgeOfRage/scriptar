@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
+{% extends "navbar.html" %}
 
 {% block title %}Index{% endblock %}
 
 {% block content %}
+	{% block navbar %} {{ super() }} {% endblock %}
 	<div class="jumbotron">
 		<h1>Sign up</h1>
 		<form method="post">
