@@ -116,7 +116,7 @@ def file_upload():
 
         print("2")
 
-        file_path_base = ''.join('/srv/nginx/flask/scriptar/static/uploads/', script_name)
+        file_path_base = ''.join(['/srv/nginx/flask/scriptar/static/uploads/', script_name])
 
         for f in request.files:
             print("3")
