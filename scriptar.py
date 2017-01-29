@@ -125,6 +125,7 @@ def file_upload():
 
         db.commit()
         close_db(db, cur)
+        print("uspesno postao peder")
         return 'kurac'
 
 
