@@ -97,14 +97,11 @@ def file_upload():
             return render_template('file_upload.html')
     elif request.method == 'POST':
 
-        print(request)
-
         # if 'file0' not in request.files:
             # return redirect(url_for('file_upload'))
 
         db = init_db()
         cur = db.cursor()
-        print("1")
 
         # subject = request.form['subject']
         # user = session['user']
@@ -114,13 +111,10 @@ def file_upload():
         description = request.form['description']
         # link = request.form['link']
 
-        print("2")
-
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', script_name])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
         for f in request.files:
-            print("3")
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
                 # extension = filename.rsplit('.', 1)[1].lower()
@@ -130,10 +124,8 @@ def file_upload():
                 request.files[f].save(os.path.join(file_path))
                 cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (script_name, description, subject, user))
 
-        print("4")
         db.commit()
         close_db(db, cur)
-        print("uspesno postao peder")
         return 'kurac'
 
 
