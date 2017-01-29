@@ -14,6 +14,7 @@ import os
 from flask import Flask, request, session, render_template, redirect, url_for
 import mysql.connector
 from werkzeug.utils import secure_filename
+import bcrypt
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -44,6 +45,8 @@ def signup():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        if password == request.form['password_con']:
+            password = bcrypt.hashpw(password, bcrypt.gensalt())
         name = request.form['name']
         cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)' % (username, email, password, name, '2', ))
         db.commit()
