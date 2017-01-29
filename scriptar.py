@@ -24,6 +24,7 @@ mysql.init_app(app)
 def index():
     return render_template('index.html')
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
@@ -36,9 +37,11 @@ def signup():
         username = request.form['username']
         password = request.form['password']
 
+
 @app.route('/login')
 def login():
     return render_template('login.html')
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def file_upload():
@@ -51,12 +54,19 @@ def file_upload():
 
         if 'file0' not in request.files:
             return redirect(url_for('file_upload'))
-        
+
         for f in request.files:
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
-                request.files[f].save(os.path.join('/srv/http/scriptar/uploads', filename))
+                request.files[f].save(os.path.join('/srv/http/scriptar/static/uploads', filename))
         return 'kurac'
+
+
+@app.route('list_uploads')
+def list_uploads():
+    files = os.listdir()
+    return render_template('list_uploads.html', files=files)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

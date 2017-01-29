@@ -10,15 +10,6 @@ body {
 	color: black;
 }
 
-.container {
-	/*margin: 0 2%*/
-
-}
-
-
-
-
-
 .btn:focus, .upload-btn:focus{
     outline: 0 !important;
 }
