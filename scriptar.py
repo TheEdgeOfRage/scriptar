@@ -15,6 +15,8 @@ from flask import Flask, request, session, render_template, redirect, url_for
 import mysql.connector
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
+import string
+import random
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -64,25 +66,39 @@ def login():
 def file_upload():
     if request.method == 'GET':
         if 'user' in session:
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         else:
             return render_template('file_upload.html')
     elif request.method == 'POST':
 
-        if 'file0' not in request.files:
-            return redirect(url_for('file_upload'))
+        print(request)
 
-        # user = request.session['user']
+        # if 'file0' not in request.files:
+            # return redirect(url_for('file_upload'))
 
-        # if len(request.files) > 1:
+        db = init_db()
+        cur = db.cursor()
 
+        subject = request.session['subject']
+        user = request.session['user']
+        script_name = request.form['script_name']
+        # link = request.form['link']
+        description = request.form['description']
+        
+        file_path_base = ''.join('/srv/nginx/flask/scriptar/static/uploads/', script_name)
 
         for f in request.files:
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
-                extension = filename.rsplit('.', 1)[1].lower()
-                # print(extension)
-                request.files[f].save(os.path.join('/srv/http/scriptar/static/uploads', filename))
+                # extension = filename.rsplit('.', 1)[1].lower()
+                # filename = ''.join(['file_', 'asdf.', extension])
+                file_path = ''.join([file_path_base,'/', filename])
+                               
+                request.files[f].save(os.path.join(file_path))
+                cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
+        
+        db.commit()
+        close_db(db, cur)
         return 'kurac'
 
 

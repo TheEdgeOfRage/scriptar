@@ -16,7 +16,9 @@ $('#upload-input').on('change', function(){
 
             formData.append('file' + i, file, file.name);
         }
-        // formData.append('file', files[0], files[0].name);
+
+        formData.append('script_name', $("#script_name").value());
+        formData.append('description', $("#description").value());
     
         $.ajax({
             url: '/upload',
