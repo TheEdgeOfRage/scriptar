@@ -53,22 +53,15 @@ def file_upload():
         #     file.save('/srv/http/scriptar/uploads/uploaded_file.txt')
         # return redirect(url_for('index'))
 
-        # check if the post request has the file part
         if 'file' not in request.files:
-            # flash('No file part')
             return redirect(url_for('file_upload'))
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            # flash('No selected file')
-            return redirect(url_for('file_upload'))
-        if file: #and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            file.save(os.path.join('/srv/http/scriptar/uploads/', filename))
-            # return redirect(url_for('uploaded_file', filename=filename))
-            return 'kurac'
+        
+        for f in file:
+            if f.filename != '' and f:
+                filename = secure_filename(f.filename)
+                f.save(os.path.join('/srv/http/scriptar/uploads/', filename))
+        return 'kurac'
 
 
 
