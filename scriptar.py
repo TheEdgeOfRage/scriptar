@@ -48,6 +48,7 @@ def file_upload():
     elif request.method == 'POST':
         f = request.files['file']
         f.save('/srv/http/scriptar/uploads/uploaded_file.txt')
+        return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
