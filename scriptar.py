@@ -53,11 +53,12 @@ def file_upload():
         #     file.save('/srv/http/scriptar/uploads/uploaded_file.txt')
         # return redirect(url_for('index'))
 
-        if 'file[]' not in request.files and 'file[]' not in request:
+        if 'file' not in request.files:
             return redirect(url_for('file_upload'))
-        file = request.files['file[]']
+        file = request.files['file']
         
         for f in file:
+            print("\n\n",f,"\n\n")
             if f.filename != '' and f:
                 filename = secure_filename(f.filename)
                 f.save(os.path.join('/srv/http/scriptar/uploads/', filename))

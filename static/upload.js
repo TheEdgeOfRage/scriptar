@@ -14,7 +14,7 @@ $('#upload-input').on('change', function(){
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
 
-            formData.append('file[]', file, file.name);
+            formData.append('file' + i, file, file.name);
         }
         // formData.append('file', files[0], files[0].name);
     
