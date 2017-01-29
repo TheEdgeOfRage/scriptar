@@ -47,7 +47,7 @@ def file_upload():
             return render_template('file_upload.html')
     elif request.method == 'POST':
         f = request.files['file']
-        f.save('/var/www/uploads/uploaded_file.txt')
+        f.save('/srv/http/scriptar/uploads/uploaded_file.txt')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
