@@ -51,7 +51,6 @@ def signup():
         return redirect(url_for('signup'))
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -64,7 +63,7 @@ def login():
         cur = db.cursor()
         username = request.form['username']
         password = request.form['password']
-        cur.execute('SELECT * from User WHERE username=%s' % (username,))
+        cur.execute('SELECT * from User WHERE username="%s"' % (username,))
         app.logger.debug(cur)
         return "arst"
         # if argon2.verify(password,
