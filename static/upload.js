@@ -20,6 +20,7 @@ $('#submit-file-upload').on('click', function (event){
 
         formData.append('script_name', $("#script_name").value());
         formData.append('description', $("#description").value());
+        alert("doso ovde")
     
         $.ajax({
             url: '/upload',
