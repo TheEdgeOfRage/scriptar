@@ -54,6 +54,7 @@ def signup():
         app.logger.debug("Sucessfully added user")
         return redirect(url_for('index'))
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -74,6 +75,15 @@ def login():
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
+
+
+@app.route('/logout')
+def logout():
+    if not 'user' in session:
+        return redirect(url_for('login'))
+    else:
+        session.pop('user', None)
+        return redirect(url_for('index'))
 
 
 @app.route('/upload', methods=['GET', 'POST'])
