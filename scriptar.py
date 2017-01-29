@@ -72,9 +72,16 @@ def file_upload():
         if 'file0' not in request.files:
             return redirect(url_for('file_upload'))
 
+        # user = request.session['user']
+
+        # if len(request.files) > 1:
+
+
         for f in request.files:
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
+                extension = filename.rsplit('.', 1)[1].lower()
+                # print(extension)
                 request.files[f].save(os.path.join('/srv/http/scriptar/static/uploads', filename))
         return 'kurac'
 
