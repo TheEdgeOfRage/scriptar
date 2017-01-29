@@ -45,7 +45,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         name = request.form['name']
-        cur.execute('INSERT INTO User (username, email, password, name) VALUES ("%s", "%s", "%s", "%s")' % (username, email, password, name, ))
+        cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)' % (username, email, password, name, '2', ))
         db.commit()
         close_db(db, cur)
         app.logger.debug("Sucessfully added user")
