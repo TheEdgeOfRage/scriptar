@@ -91,7 +91,7 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 def file_upload():
     if request.method == 'GET':
-        if 'user' in session:
+        if 'user' not in session:
             return redirect(url_for('login'))
         else:
             return render_template('file_upload.html')
@@ -110,7 +110,7 @@ def file_upload():
         script_name = request.form['script_name']
         # link = request.form['link']
         description = request.form['description']
-        
+
         file_path_base = ''.join('/srv/nginx/flask/scriptar/static/uploads/', script_name)
 
         for f in request.files:
@@ -119,10 +119,10 @@ def file_upload():
                 # extension = filename.rsplit('.', 1)[1].lower()
                 # filename = ''.join(['file_', 'asdf.', extension])
                 file_path = ''.join([file_path_base,'/', filename])
-                               
+
                 request.files[f].save(os.path.join(file_path))
                 cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
-        
+
         db.commit()
         close_db(db, cur)
         return 'kurac'
