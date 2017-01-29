@@ -128,7 +128,7 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (name, description, subject, user))
+                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (script_name, description, subject, user))
 
         print("4")
         db.commit()
