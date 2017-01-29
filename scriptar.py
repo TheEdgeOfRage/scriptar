@@ -52,9 +52,22 @@ def signup():
 
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'GET':
+        if not 'user' in session:
+            return render_template('login.html')
+        else:
+            return redirect(url_for('index'))
+    elif request.method == 'POST':
+        db = init_db()
+        cur = db.cursor()
+        username = request.form['username']
+        password = request.form['password']
+        cur.execute('SELECT * from User WHERE username=%s' % (username,))
+        app.logger.debug(cur)
+        return "arst"
+        # if argon2.verify(password,
 
 
 @app.route('/upload', methods=['GET', 'POST'])
