@@ -64,7 +64,7 @@ def file_upload():
 
 @app.route('/list_uploads')
 def list_uploads():
-    files = os.listdir()
+    files = os.listdir('static/uploads/')
     return render_template('list_uploads.html', files=files)
 
 
