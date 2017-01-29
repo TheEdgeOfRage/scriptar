@@ -117,6 +117,7 @@ def file_upload():
         print("2")
 
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', script_name])
+        os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
         for f in request.files:
             print("3")
