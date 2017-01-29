@@ -31,6 +31,7 @@ def signup():
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
+        cursor = mysql.get_db().cursor()
         username = request.form['username']
         password = request.form['password']
 

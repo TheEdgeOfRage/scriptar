@@ -1,0 +1,16 @@
+/*
+ * style.css
+ * Copyright (C) 2017 pavle
+ *
+ * Distributed under terms of the MIT license.
+ */
+
+body {
+	background: white;
+	color: black;
+}
+
+.container {
+	margin: 0 2%
+}
+
