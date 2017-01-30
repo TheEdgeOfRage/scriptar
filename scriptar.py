@@ -59,9 +59,9 @@ def signup():
         cur.callproc('createUser', (username, email, password, name))
         data = cur.fetchall()
         app.logger.debug(data)
-        # if data:
-            # flash(data, 'error')
-            # return render_template('signup', username=username, email=email, name=name)
+        if data:
+            flash(data, 'error')
+            return render_template('signup', username=username, email=email, name=name)
 
         db.commit()
         close_db(db, cur)
