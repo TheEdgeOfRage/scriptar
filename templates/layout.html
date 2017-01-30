@@ -16,7 +16,7 @@
 				<nav>
 					<ul class="nav nav-pills pull-right">
 						{{ nav_link('index', 'Home') }}
-						{% if 'user' not in session %}
+						{% if 'user_id' not in session %}
 							{{ nav_link('login', 'Log in') }}
 							{{ nav_link('signup', 'Sign up') }}
 						{% else %}
