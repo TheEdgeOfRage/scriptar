@@ -86,9 +86,9 @@ def login():
         password = request.form['password']
         # cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
         parameters = [username, 0, '']
-        cur.callproc('getUser', parameters)
-        user_id = parameters[1]
-        password_db = parameters[2]
+        result = cur.callproc('getUser', parameters)
+        user_id = result[1]
+        password_db = result[2]
         app.logger.debug(password_db)
 
         if user_id != None:
