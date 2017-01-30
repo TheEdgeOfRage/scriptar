@@ -57,11 +57,9 @@ def signup():
             close_db(db, cur)
             return render_template('signup.html', username=username, email=email, name=name)
 
-        cur.callproc('createUser', (username,))
-        app.logger.debug(cur.stored_results())
-        data = cur.stored_results()
+        cur.callproc('createUser', (username, email, password, name))
         result = None
-        for item in data:
+        for item in cur.stored_results():
             result = item
             break
 
@@ -90,7 +88,8 @@ def login():
         password_db = None
         user_id = None
         result = []
-        cur.callproc('getUser', (username, password_db, user_id))
+        cur.callproc('getUser', (username,))
+        app.logger(cur.stored_results())
 
         for item in cur.stored_results():
             result.append(item.fetchall())
