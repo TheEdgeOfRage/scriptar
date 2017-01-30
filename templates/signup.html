@@ -6,12 +6,12 @@
 	<div class="jumbotron">
 		<h1>Sign up</h1>
 		<form method="post">
-			<p><input type=text name=username placeholder=username>
-			<p><input type=email name=email placeholder=email>
-			<p><input type=password name=password placeholder=password>
-			<p><input type=password name=password_con placeholder="confirm password">
-			<p><input type=text name=name placeholder="full name">
-			<p><input type=submit value="Sign up">
+			<p><input type=text name=username placeholder=username>{% if username %} {{ username}} {% endif %}</input>
+			<p><input type=email name=email placeholder=email>arst</input>
+			<p><input type=password name=password placeholder=password></input>
+			<p><input type=password name=password_con placeholder="confirm password"></input>
+			<p><input type=text name=name placeholder="full name"></input>
+			<p><input type=submit value="Sign up"></input>
 		</form>
 	</div>
 {% endblock %}

@@ -44,13 +44,24 @@ def signup():
             return redirect(url_for('index'))
     elif request.method == 'POST':
         (db, cur) = init_db()
+
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        name = request.form['name']
+
         if password == request.form['password_con']:
             password = argon2.hash(password)
-        name = request.form['name']
-        cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)' % (username, email, password, name, '2', ))
+        else:
+            flash('Passwords do not match', 'error')
+            return render_template('signup', username=username, email=email, name=name)
+
+        try:
+            cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)', (username, email, password, name, '2', ))
+        except:
+            flash('username or email already in use', 'error')
+            return render_template('signup', username=username, email=email, name=name)
+
         db.commit()
         close_db(db, cur)
         app.logger.debug("Sucessfully added user")
@@ -68,7 +79,7 @@ def login():
         (db, cur) = init_db()
         username = request.form['username']
         password = request.form['password']
-        cur.execute('SELECT ID, password from User WHERE username="%s"' % (username,))
+        cur.execute('SELECT ID, password from User WHERE username="%s"', (username,))
         for (user_id, password_db) in cur:
             print(password_db)
             if argon2.verify(password, password_db):
@@ -76,6 +87,7 @@ def login():
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
+        return redirect(url_for('signup'))
 
 
 @app.route('/logout')
@@ -116,7 +128,7 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (script_name, description, subject, user_id))
+                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
 
         db.commit()
         close_db(db, cur)
