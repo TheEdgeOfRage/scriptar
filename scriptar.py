@@ -22,7 +22,8 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 def init_db():
-    return mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
+    con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
+    return (con, con.cursor())
 
 def close_db(db, cur):
     cur.close()
@@ -37,13 +38,12 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
-        if not 'user' in session:
+        if not 'user_id' in session:
             return render_template('signup.html')
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        db = init_db()
-        cur = db.cursor()
+        (db, cur) = init_db()
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
@@ -60,20 +60,19 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        if not 'user' in session:
+        if not 'user_id' in session:
             return render_template('login.html')
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        db = init_db()
-        cur = db.cursor()
+        (db, cur) = init_db()
         username = request.form['username']
         password = request.form['password']
-        cur.execute('SELECT password from User WHERE username="%s"' % (username,))
-        for (password_db,) in cur:
+        cur.execute('SELECT ID, password from User WHERE username="%s"' % (username,))
+        for (user_id, password_db) in cur:
             print(password_db)
             if argon2.verify(password, password_db):
-                session['user'] = username
+                session['user_id'] = user_id
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
@@ -81,32 +80,26 @@ def login():
 
 @app.route('/logout')
 def logout():
-    if not 'user' in session:
+    if not 'user_id' in session:
         return redirect(url_for('login'))
     else:
-        session.pop('user', None)
+        session.pop('user_id', None)
         return redirect(url_for('index'))
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def file_upload():
     if request.method == 'GET':
-        if 'user' not in session:
+        if 'user_id' not in session:
             return redirect(url_for('login'))
         else:
             return render_template('file_upload.html')
     elif request.method == 'POST':
-
-        # if 'file0' not in request.files:
-            # return redirect(url_for('file_upload'))
-
-        db = init_db()
-        cur = db.cursor()
+        (db, cur) = init_db()
 
         # subject = request.form['subject']
-        # user = session['user']
+        user_id = session['user_id']
         subject = '1'
-        user = '6'
         script_name = request.form['script_name']
         description = request.form['description']
         # link = request.form['link']
@@ -123,11 +116,11 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (script_name, description, subject, user))
+                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)' % (script_name, description, subject, user_id))
 
         db.commit()
         close_db(db, cur)
-        return 'kurac'
+        return 'Upload sucessful'
 
 
 @app.route('/list_uploads')
