@@ -86,13 +86,13 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
+        app.logger.debug(cur)
         for (user_id, password_db) in cur:
-            print(password_db)
             if argon2.verify(password, password_db):
                 session['user_id'] = user_id
                 return redirect(url_for('index'))
             else:
-                return redirect(url_for('login'))
+                return render_template('login.html')
         return redirect(url_for('signup'))
 
 
