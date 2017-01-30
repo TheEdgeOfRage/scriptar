@@ -89,6 +89,7 @@ def login():
         cur.callproc('getUser', parameters)
         user_id = parameters[1]
         password_db = parameters[2]
+        app.logger.debug(password_db)
 
         if user_id != None:
             if argon2.verify(password, password_db):
