@@ -54,7 +54,6 @@ def signup():
             password = argon2.hash(password)
         else:
             # flash('Passwords do not match', 'error')
-            app.logger.error("passwords do not match")
             return render_template('signup', username=username, email=email, name=name)
 
         try:
