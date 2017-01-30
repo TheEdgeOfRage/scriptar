@@ -57,7 +57,7 @@ def signup():
             return render_template('signup.html', username=username, email=email, name=name)
 
         cur.callproc('createUser', (username, email, password, name))
-        data = cur.fetchall()
+        data = cur.stored_results()
         app.logger.debug(data)
         if data:
             flash(data, 'error')
