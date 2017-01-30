@@ -62,7 +62,7 @@ def signup():
         app.logger.debug(data)
         if data:
             close_db(db, cur)
-            flash(data, 'error')
+            flash(data[0].fetchall(), 'error')
             return render_template('signup.html', username=username, email=email, name=name)
 
         db.commit()
