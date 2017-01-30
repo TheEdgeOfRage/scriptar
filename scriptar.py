@@ -80,7 +80,7 @@ def login():
         (db, cur) = init_db()
         username = request.form['username']
         password = request.form['password']
-        cur.execute('SELECT ID, password from User WHERE username="%s"', (username,))
+        cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
         for (user_id, password_db) in cur:
             print(password_db)
             if argon2.verify(password, password_db):
@@ -129,7 +129,7 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Script (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
+                cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
 
         db.commit()
         close_db(db, cur)
