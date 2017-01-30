@@ -45,23 +45,23 @@ def signup():
     elif request.method == 'POST':
         (db, cur) = init_db()
 
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        name = request.form['name']
+        username = request.form['username'].strip()
+        email = request.form['email'].strip()
+        password = request.form['password'].strip()
+        name = request.form['name'].strip()
 
-        if password == request.form['password_con']:
+        if password == request.form['password_con'].strip():
             password = argon2.hash(password)
         else:
-            # flash('Passwords do not match', 'error')
+            flash('Passwords do not match', 'error')
             return render_template('signup.html', username=username, email=email, name=name)
 
-        try:
-            cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)', (username, email, password, name, '2', ))
-        except:
-            app.logger.error("SQL insert error")
-            flash('username or email already in use', 'error')
-            return render_template('signup', username=username, email=email, name=name)
+        cur.callproc('createUser', (username, email, password, name))
+        data = cur.fetchall()
+        app.logger.debug(data)
+        # if data:
+            # flash(data, 'error')
+            # return render_template('signup', username=username, email=email, name=name)
 
         db.commit()
         close_db(db, cur)
