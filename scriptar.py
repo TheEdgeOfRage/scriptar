@@ -54,17 +54,18 @@ def signup():
             password = argon2.hash(password)
         else:
             flash('Passwords do not match', 'error')
+            close_db(db, cur)
             return render_template('signup.html', username=username, email=email, name=name)
 
         cur.callproc('createUser', (username, email, password, name))
         data = cur.stored_results()
         app.logger.debug(data)
         if data:
+            close_db(db, cur)
             flash(data, 'error')
-            return render_template('signup', username=username, email=email, name=name)
+            return render_template('signup.html', username=username, email=email, name=name)
 
         db.commit()
-        close_db(db, cur)
         app.logger.debug("Sucessfully added user")
         return redirect(url_for('index'))
 
