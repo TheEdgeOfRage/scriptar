@@ -64,6 +64,7 @@ def signup():
             result = item
             break
 
+        app.logger.debug(result)
         if result:
             close_db(db, cur)
             flash(result.fetchall()[0], 'error')
