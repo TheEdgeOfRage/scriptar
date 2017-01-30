@@ -64,14 +64,14 @@ def signup():
             result = item
             break
 
-        app.logger.debug(result)
         if result:
             close_db(db, cur)
-            flash(result.fetchall(), 'error')
+            app.logger.debug(result.fetchall())
+            # flash(result.fetchall(), 'error')
             return render_template('signup.html', username=username, email=email, name=name)
 
         db.commit()
-        app.logger.debug("Sucessfully added user")
+        close_db(db, cur)
         return redirect(url_for('index'))
 
 
