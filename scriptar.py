@@ -85,6 +85,7 @@ def login():
         (db, cur) = init_db()
         username = request.form['username']
         password = request.form['password']
+        app.logger.debug(username+'arst')
         cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
         row = cur.fetchone()
         app.logger.debug(row)
