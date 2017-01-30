@@ -59,6 +59,7 @@ def signup():
 
         cur.callproc('createUser', (username, email, password, name))
         data = cur.stored_results()
+        result = None
         for item in data:
             result = item
             break
