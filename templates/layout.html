@@ -16,9 +16,13 @@
 				<nav>
 					<ul class="nav nav-pills pull-right">
 						{{ nav_link('index', 'Home') }}
-						{{ nav_link('login', 'Log in') }}
-						{{ nav_link('signup', 'Sign up') }}
-						{{ nav_link('file_upload', 'Upload') }}
+						{% if 'user' not in session %}
+							{{ nav_link('login', 'Log in') }}
+							{{ nav_link('signup', 'Sign up') }}
+						{% else %}
+							{{ nav_link('file_upload', 'Upload') }}
+							{{ nav_link('logout', 'Log out') }}
+						{% endif %}
 					</ul>
 				</nav>
 				<a href="{{ url_for('index') }}"><h3 class="text-muted">Scriptar</h3></a>
