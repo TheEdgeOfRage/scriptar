@@ -86,8 +86,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
-        cur.fetchall()
-        app.logger.debug(cur)
+        row = cur.fetchone()
+        app.logger.debug(row)
         for (user_id, password_db) in cur:
             if argon2.verify(password, password_db):
                 session['user_id'] = user_id
