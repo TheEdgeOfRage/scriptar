@@ -53,12 +53,14 @@ def signup():
         if password == request.form['password_con']:
             password = argon2.hash(password)
         else:
-            flash('Passwords do not match', 'error')
+            # flash('Passwords do not match', 'error')
+            app.logger.error("passwords do not match")
             return render_template('signup', username=username, email=email, name=name)
 
         try:
             cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)', (username, email, password, name, '2', ))
         except:
+            app.logger.error("SQL insert error")
             flash('username or email already in use', 'error')
             return render_template('signup', username=username, email=email, name=name)
 
