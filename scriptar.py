@@ -54,7 +54,7 @@ def signup():
             password = argon2.hash(password)
         else:
             # flash('Passwords do not match', 'error')
-            return render_template('signup', username=username, email=email, name=name)
+            return render_template('signup.html', username=username, email=email, name=name)
 
         try:
             cur.execute('INSERT INTO User (username, email, password, name, Course_ID) VALUES ("%s", "%s", "%s", "%s", %s)', (username, email, password, name, '2', ))
