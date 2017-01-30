@@ -11,7 +11,7 @@
 """
 
 import os
-from flask import Flask, request, session, render_template, redirect, url_for
+from flask import Flask, request, session, render_template, redirect, url_for, flash
 import mysql.connector
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
