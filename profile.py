@@ -25,18 +25,10 @@ def profile():
     db.execute(query)
     row = db.cur.fetchone()
 
-    # script_dict = {}
     script_list = []
-    current_app.logger.info(row)
-    current_app.logger.info(query)
 
     while row is not None:
-        # script_dict['id'] = str(row[0])
-        # script_dict['name'] = row[1]
-        # script_dict['desc'] = row[2].decode('UTF-8')
-        # script_dict['subj'] = row[3]
         script_list.append({'id': str(row[0]), 'name': row[1], 'desc': row[2].decode('UTF-8'), 'subj': row[3]})
         row = db.cur.fetchone()
-        current_app.logger.info(script_list)
 
     return render_template('profile.html', scripts=script_list)
