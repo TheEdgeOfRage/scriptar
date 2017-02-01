@@ -132,7 +132,8 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
+                data = (script_name, description, subject, user_id)
+                db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', data)
 
         db.close_db()
         return 'Upload sucessful'
