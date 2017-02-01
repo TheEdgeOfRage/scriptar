@@ -5,18 +5,12 @@
  * Distributed under terms of the MIT license.
  */
 
-body {
-	background: white;
-	color: black;
-}
-
 img {
 	max-width: 100%;
 }
 
-h4 {
+/*h4 {
 	padding-bottom: 30px;
-	color: #B8BDC1;
 }
 
 .btn:focus, .upload-btn:focus{
@@ -68,6 +62,6 @@ h4 {
 }
 
 #upload-input {
-	/*display: none;*/
+	display: none;
 }
-
+*/
