@@ -35,6 +35,7 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    app.logger.debug(request)
     if request.method == 'GET':
         if not 'user_id' in session:
             return render_template('signup.html')
