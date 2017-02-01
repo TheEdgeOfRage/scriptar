@@ -24,20 +24,16 @@ def profile():
     db.execute('SELECT sc.ID, sc.name, sc.Description, su.name FROM Scripts AS sc JOIN Subjects AS su ON su.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
     row = db.cur.fetchone()
 
-    script_dict = {}
+    # script_dict = {}
     script_list = []
 
     while row is not None:
-        # current_app.logger.info(row)
-        script_dict['id'] = str(row[0])
-        script_dict['name'] = row[1]
-        script_dict['desc'] = row[2].decode('UTF-8')
-        script_dict['subj'] = row[3]
-        script_list.append(script_dict)
-        # current_app.logger.info(script_dict)
-        # current_app.logger.info(script_list)
+        # script_dict['id'] = str(row[0])
+        # script_dict['name'] = row[1]
+        # script_dict['desc'] = row[2].decode('UTF-8')
+        # script_dict['subj'] = row[3]
+        script_list.append({'id': str(row[0]), 'name': row[1], 'desc': row[2].decode('UTF-8'), 'subj': row[3]})
 
         row = db.cur.fetchone()
 
-    # current_app.logger.info(script_list)
     return render_template('profile.html', scripts=script_list)
