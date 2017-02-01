@@ -13,10 +13,12 @@
 from flask import Blueprint, render_template, session, current_app
 
 from db import db as mysqlDB
+from decorators import login_required
 
 profile_app = Blueprint('profile_app', __name__)
 
 @profile_app.route('/')
+@login_required
 def profile():
     db = mysqlDB()
     db.execute('SELECT sc.ID, sc.name, sc.Description, su.name FROM Scripts AS sc JOIN Subjects AS su ON su.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
