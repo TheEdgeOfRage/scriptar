@@ -34,10 +34,10 @@ def profile():
         script_dict['desc'] = row[2].decode('UTF-8')
         script_dict['subj'] = row[3]
         script_list.append(script_dict)
-        current_app.logger.info(script_dict)
-        current_app.logger.info(script_list)
+        # current_app.logger.info(script_dict)
+        # current_app.logger.info(script_list)
 
         row = db.cur.fetchone()
 
-    current_app.logger.info(script_list)
+    # current_app.logger.info(script_list)
     return render_template('profile.html', scripts=script_list)
