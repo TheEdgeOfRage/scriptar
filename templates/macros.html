@@ -5,3 +5,7 @@
 	<li><a href="{{ url_for(endpoint) }}">{{name}}</a></li>
 {% endif %}
 {% endmacro %}
+
+{% macro drop_link(endpoint, name) %}
+<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for(endpoint) }}">{{name}}</a></li>
+{% endmacro %}
