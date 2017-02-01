@@ -19,11 +19,20 @@ profile_app = Blueprint('profile_app', __name__)
 @profile_app.route('/')
 def profile():
     db = mysqlDB()
-    db.execute('SELECT ID, name, create_time, Description, Subject_ID FROM Scripts WHERE User_ID=%s' % session['user_id'])
+    db.execute('SELECT ID, name, Description, Subjects.name FROM Scripts JOIN Subjects ON Subjects.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
     row = db.cur.fetchone()
 
+    script_dict = {}
+    script_list = []
+
     while row is not None:
-        current_app.logger.info(row)
+        # current_app.logger.info(row)
+        script_dict['id'] = str(row[0])
+        script_dict['name'] = row[1]
+        script_dict['desc'] = row[2]
+        script_dict['subj'] = row[3]
+        script_list.append(script_dict)
+
         row = db.cur.fetchone()
 
-    return render_template('profile.html')
+    return render_template('profile.html', scripts=script_list)

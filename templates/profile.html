@@ -5,6 +5,16 @@
 {% block content %}
 	<div class="jumbotron">
 		<h1>Profile</h1>
+		{% if scripts %}
+			{% for script in scripts %}
+				<div class="panel">
+					<a href="/list_uploads/{{ script['id'] }}"><h3>{{ script['name'] }}</h3></a>
+					<p>{{ script['desc'] }} <span style="float: right;">{{ script['subj'] }}</span></p>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>There are no files</p>
+		{% endif %}
 	</div>
 {% endblock %}
 
