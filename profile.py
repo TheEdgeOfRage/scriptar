@@ -14,6 +14,6 @@ from flask import Blueprint, render_template
 
 profile_app = Blueprint('profile_app', __name__)
 
-@profile_app.route('/')
+@profile_app.route('/profile')
 def profile():
     return render_template('profile.html')
