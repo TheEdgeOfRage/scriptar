@@ -15,30 +15,39 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<div class="header">
-				<nav>
-					<ul class="nav nav-pills pull-right">
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="{{ url_for('index') }}" class="navbar-brand">Scriptar</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav navbar-right">
 						{{ nav_link('index', 'Home') }}
 						{% if 'user_id' not in session %}
 							{{ nav_link('login', 'Log in') }}
 							{{ nav_link('signup', 'Sign up') }}
 						{% else %}
-							<li><div class="dropdown">
-									<button class="btn btn-default dropdown-toggle" type="button" id="profile_menu" data-toggle="dropdown">Profile<span class="caret"></span></button>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="profile_menu">
-										{{ drop_link('profile_app.profile', 'Profile') }}
-										{{ drop_link('file_upload', 'Upload') }}
-										<li role="presentation" class="divider"></li>
-										{{ drop_link('logout', 'Log out') }}
-									</ul>
-								</div></li>
-							{% endif %}
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profile_menu">Profile <span class="caret"></span></a>
+								<ul class="dropdown-menu" aria-labelledby="profile_menu">
+									{{ drop_link('profile_app.profile', 'Profile') }}
+									{{ drop_link('file_upload', 'Upload') }}
+									<li role="presentation" class="divider"></li>
+									{{ drop_link('logout', 'Log out') }}
+								</ul>
+							</li>
+						{% endif %}
 					</ul>
-				</nav>
-				<a href="{{ url_for('index') }}"><h3 class="text-muted">Scriptar</h3></a>
+				</div>
 			</div>
+		</div>
 
+		<div class="container">
 			<div id="content">{% block content %}{% endblock %}</div>
 
 			<div id="footer">
