@@ -17,7 +17,14 @@ class db:
         con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
         cur = con.cursor()
 
+    def callproc(procedure, data):
+        return cur.callproc(procedure, data)
+
+    def execute(query, data):
+        return cur.execute(query, data)
+
     def close_db():
+        con.commit()
         cur.close()
         con.close()
 

@@ -55,9 +55,9 @@ def signup():
             db.close_db()
             return render_template('signup.html', username=username, email=email, name=name)
 
-        cur.callproc('createUser', (username, email, password, name))
+        db.callproc('createUser', (username, email, password, name))
         result = None
-        for item in cur.stored_results():
+        for item in db.cur.stored_results():
             result = item
             break
 
@@ -82,7 +82,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         parameters = [username, 0, '']
-        result = cur.callproc('getUser', parameters)
+        result = db.callproc('getUser', parameters)
         user_id = result[1]
         password_db = result[2]
 
@@ -112,7 +112,7 @@ def file_upload():
         else:
             return render_template('file_upload.html')
     elif request.method == 'POST':
-        (db, cur) = init_db()
+        db = mysqlDB()
 
         # subject = request.form['subject']
         user_id = session['user_id']
@@ -133,7 +133,7 @@ def file_upload():
                 file_path = ''.join([file_path_base,'/', filename])
 
                 request.files[f].save(os.path.join(file_path))
-                cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
+                db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
 
         db.close_db()
         return 'Upload sucessful'

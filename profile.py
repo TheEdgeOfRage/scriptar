@@ -18,6 +18,5 @@ profile_app = Blueprint('profile_app', __name__)
 
 @profile_app.route('/')
 def profile():
-    (db, cur) = init_db()
-
+    db = mysqlDB()
     return render_template('profile.html')
