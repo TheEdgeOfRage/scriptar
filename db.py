@@ -26,7 +26,7 @@ class db:
     def execute(self, query):
         return self.cur.execute(query)
 
-    def close_db():
+    def close_db(self):
         self.con.commit()
         self.cur.close()
         self.con.close()
