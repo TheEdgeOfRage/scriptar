@@ -29,8 +29,8 @@ def profile():
         # current_app.logger.info(row)
         script_dict['id'] = str(row[0])
         script_dict['name'] = row[1]
-        script_dict['desc'] = row[2]
-        script_dict['subj'] = row[3].decode('UTF-8')
+        script_dict['desc'] = row[2].decode('UTF-8')
+        script_dict['subj'] = row[3]
         script_list.append(script_dict)
 
         row = db.cur.fetchone()
