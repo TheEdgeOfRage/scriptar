@@ -13,7 +13,6 @@
 import os
 # import string
 # import random
-import mysql.connector
 
 from functools import wraps
 from flask import Flask, request, session, render_template, redirect, url_for, flash

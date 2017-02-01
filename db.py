@@ -10,6 +10,8 @@
 Scripts for communicating with the database. Separated into a new file for accessibility between all python files
 """
 
+import mysql.connector
+
 class db:
     con = None
     cur = None
