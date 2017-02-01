@@ -19,7 +19,7 @@ profile_app = Blueprint('profile_app', __name__)
 @profile_app.route('/')
 def profile():
     db = mysqlDB()
-    db.execute('SELECT ID, name, Description, Subjects.name FROM Scripts JOIN Subjects ON Subjects.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
+    db.execute('SELECT sc.ID, sc.name, sc.Description, su.name FROM Scripts AS sc JOIN Subjects AS su ON su.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
     row = db.cur.fetchone()
 
     script_dict = {}
