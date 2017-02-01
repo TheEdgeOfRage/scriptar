@@ -11,15 +11,23 @@
 """
 
 import os
-from flask import Flask, request, session, render_template, redirect, url_for, flash
+# import string
+# import random
 import mysql.connector
+
+from functools import wraps
+from flask import Flask, request, session, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
-import string
-import random
+
+from profile import profile_app
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
+
+# app.register_blueprint(profile)
+app.register_blueprint(profile_app, url_prefix='/profile')
+# app.register_blueprint(profile, url_prefix='/profile')
 
 def init_db():
     con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
@@ -84,7 +92,6 @@ def login():
         (db, cur) = init_db()
         username = request.form['username']
         password = request.form['password']
-        # cur.execute('SELECT ID, password from Users WHERE username="%s"', (username,))
         parameters = [username, 0, '']
         result = cur.callproc('getUser', parameters)
         user_id = result[1]
