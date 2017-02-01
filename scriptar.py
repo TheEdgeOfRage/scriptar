@@ -25,9 +25,7 @@ from profile import profile_app
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
-# app.register_blueprint(profile)
-app.register_blueprint(profile_app, url_prefix='/profile')
-# app.register_blueprint(profile, url_prefix='/profile')
+app.register_blueprint(profile_app, url_prefix='/')
 
 def init_db():
     con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
