@@ -15,7 +15,7 @@ import mysql.connector
 class db:
     def __init__(self):
         self.con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
-        self.cur = con.cursor()
+        self.cur = self.con.cursor()
 
     def callproc(procedure, *data):
         return self.cur.callproc(procedure, data)
