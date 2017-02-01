@@ -10,7 +10,7 @@
 
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 
 from db import db as mysqlDB
 
@@ -19,4 +19,11 @@ profile_app = Blueprint('profile_app', __name__)
 @profile_app.route('/')
 def profile():
     db = mysqlDB()
+    db.execute('SELECT ID, name, create_time, Description, Subject_ID FROM Scripts WHERE User_ID=%s' % session['user_id'])
+    row = db.cur.fetchone()
+
+    while row is not None:
+        profile_app.logger.debug(row)
+        row = db.cur.fetchone()
+
     return render_template('profile.html')
