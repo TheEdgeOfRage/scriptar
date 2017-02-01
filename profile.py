@@ -10,7 +10,7 @@
 
 """
 
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, current_app
 
 from db import db as mysqlDB
 
@@ -23,7 +23,7 @@ def profile():
     row = db.cur.fetchone()
 
     while row is not None:
-        profile_app.logger.debug(row)
+        current_app.logger.info(row)
         row = db.cur.fetchone()
 
     return render_template('profile.html')
