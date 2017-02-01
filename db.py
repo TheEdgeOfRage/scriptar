@@ -18,13 +18,13 @@ class db(object):
         self.cur = self.con.cursor()
 
     def callproc(procedure, *data):
-        return self.cur.callproc(procedure, data)
+        return cur.callproc(procedure, data)
 
     def execute(query, *data):
-        return self.cur.execute(query, data)
+        return cur.execute(query, data)
 
     def close_db():
-        self.con.commit()
-        self.cur.close()
-        self.con.close()
+        con.commit()
+        cur.close()
+        con.close()
 
