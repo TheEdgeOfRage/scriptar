@@ -26,6 +26,7 @@ def profile():
 
     # script_dict = {}
     script_list = []
+    current_app.logger.info(row)
 
     while row is not None:
         # script_dict['id'] = str(row[0])
