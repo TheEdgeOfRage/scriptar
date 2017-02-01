@@ -40,7 +40,6 @@ def signup():
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        db = mysqlDB()
 
         username = request.form['username'].strip()
         email = request.form['email'].strip()
@@ -51,10 +50,10 @@ def signup():
             password = argon2.hash(password)
         else:
             flash('Passwords do not match', 'error')
-            db.close_db()
             return render_template('signup.html', username=username, email=email, name=name)
 
-        db.callproc('createUser', (username, email, password, name))
+        db = mysqlDB()
+        db.callproc('createUser', [username, email, password, name])
         result = None
         for item in db.cur.stored_results():
             result = item
@@ -120,8 +119,8 @@ def file_upload():
         description = request.form['description']
         # link = request.form['link']
 
-        data = (script_name, description, subject, user_id)
-        db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s);', data)
+        # data = (script_name, description, subject, user_id)
+        db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s);' % (script_name, description, subject, user_id))
 
         db.execute('SELECT LAST_INSERT_ID();')
         lastid = db.cur.fetchone()
