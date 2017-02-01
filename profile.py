@@ -33,7 +33,7 @@ def profile():
         # script_dict['desc'] = row[2].decode('UTF-8')
         # script_dict['subj'] = row[3]
         script_list.append({'id': str(row[0]), 'name': row[1], 'desc': row[2].decode('UTF-8'), 'subj': row[3]})
-
         row = db.cur.fetchone()
+        current_app.logger.info(script_list)
 
     return render_template('profile.html', scripts=script_list)
