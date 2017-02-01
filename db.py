@@ -12,7 +12,7 @@ Scripts for communicating with the database. Separated into a new file for acces
 
 import mysql.connector
 
-class db:
+class db(object):
     def __init__(self):
         self.con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
         self.cur = self.con.cursor()
