@@ -21,6 +21,7 @@ from passlib.hash import argon2
 
 from db import db as mysqlDB
 from profile import profile_app
+from decorators import login_required
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -94,21 +95,17 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
-    if not 'user_id' in session:
-        return redirect(url_for('login'))
-    else:
-        session.pop('user_id', None)
-        return redirect(url_for('index'))
+    session.pop('user_id', None)
+    return redirect(url_for('index'))
 
 
 @app.route('/upload', methods=['GET', 'POST'])
+@login_required
 def file_upload():
     if request.method == 'GET':
-        if 'user_id' not in session:
-            return redirect(url_for('login'))
-        else:
-            return render_template('file_upload.html')
+        return render_template('file_upload.html')
     elif request.method == 'POST':
         db = mysqlDB()
 
