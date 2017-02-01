@@ -5,19 +5,52 @@
 {% block content %}
 	<div class="jumbotron">
 		<h1>Sign up</h1>
-		<form method="post">
-			<p><input type=text name=username placeholder=username value="{% if username %}{{username}}{% endif %}">
-			<p><input type=email name=email placeholder=email value="{% if email %}{{email}}{% endif %}">
-			<p><input type=password name=password placeholder=password>
-			<p><input type=password name=password_con placeholder="confirm password">
-			<p><input type=text name=name placeholder="full name" value="{% if name %}{{name}}{% endif %}">
-			<p><input type=submit value="Sign up">
+		<form class="form-horizontal" method="post">
+			<fieldset>
+				<div class="form-group">
+					<label for="inputUsername" class="col-lg-2 control-label">Username</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputUsername" placeholder="Username" type="text" name="username" value="{% if username %}{{username}}{% endif %}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputEmail" placeholder="Email" type="email" name="email" value="{% if email %}{{email}}{% endif %}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputPassword" placeholder="Password" type="password" name="password">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword_con" class="col-lg-2 control-label">Confirm Password</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputPassword_con" placeholder="Password confirmation" type="password" name="password_con">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputName" class="col-lg-2 control-label">Name</label>
+					<div class="col-lg-10">
+						<input class="form-control" id="inputName" placeholder="Name" type="text" name="Name" value="{% if name %}{{name}}{% endif %}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-2">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="reset" class="btn btn-default">Cancel</button>
+					</div>
+				</div>
+			</fieldset>
 		</form>
+
 		{% with messages = get_flashed_messages(with_categories=true) %}
 			{% if messages %}
 				<ul class=flashes>
 					{% for category, message in messages %}
-						<li class="{{ category }}">{{ message }}</li>
+						<p class="{{ category }}">{{ message }}</p>
 					{% endfor %}
 				</ul>
 			{% endif %}
