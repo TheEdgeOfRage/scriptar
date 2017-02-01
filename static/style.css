@@ -64,8 +64,7 @@ h4 {
 }
 
 .panel {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding: 10px;
 }
 
 #upload-input {
