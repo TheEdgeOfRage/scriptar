@@ -21,12 +21,14 @@ profile_app = Blueprint('profile_app', __name__)
 @login_required
 def profile():
     db = mysqlDB()
-    db.execute('SELECT sc.ID, sc.name, sc.Description, su.name FROM Scripts AS sc JOIN Subjects AS su ON su.ID=Subject_ID WHERE User_ID=%s' % session['user_id'])
+    query = 'SELECT sc.ID, sc.name, sc.Description, su.name FROM Scripts AS sc JOIN Subjects AS su ON su.ID=Subject_ID WHERE User_ID=%s' % session['user_id']
+    db.execute(query)
     row = db.cur.fetchone()
 
     # script_dict = {}
     script_list = []
     current_app.logger.info(row)
+    current_app.logger.info(query)
 
     while row is not None:
         # script_dict['id'] = str(row[0])
