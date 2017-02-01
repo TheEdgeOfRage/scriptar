@@ -119,7 +119,6 @@ def file_upload():
         description = request.form['description']
         # link = request.form['link']
 
-        # data = (script_name, description, subject, user_id)
         db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s);' % (script_name, description, subject, user_id))
 
         db.execute('SELECT LAST_INSERT_ID();')
@@ -155,4 +154,3 @@ def list_uploads(script_name):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
-    print(app.secret_key)
