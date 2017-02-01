@@ -123,10 +123,9 @@ def file_upload():
         db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s);' % (script_name, description, subject, user_id))
 
         db.execute('SELECT LAST_INSERT_ID();')
-        lastid = db.cur.fetchone()
-        app.logger.debug(lastid)
+        lastid = db.cur.fetchone()[0]
 
-        file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', script_name])
+        file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', str(lastid)])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
         for f in request.files:
