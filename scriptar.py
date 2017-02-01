@@ -20,21 +20,13 @@ from flask import Flask, request, session, render_template, redirect, url_for, f
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
 
+from db import db as mysqlDB
 from profile import profile_app
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 app.register_blueprint(profile_app, url_prefix='/profile')
-
-def init_db():
-    con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
-    return (con, con.cursor())
-
-def close_db(db, cur):
-    cur.close()
-    db.close()
-
 
 @app.route('/')
 def index():
@@ -49,7 +41,7 @@ def signup():
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        (db, cur) = init_db()
+        db = mysqlDB()
 
         username = request.form['username'].strip()
         email = request.form['email'].strip()
@@ -60,7 +52,7 @@ def signup():
             password = argon2.hash(password)
         else:
             flash('Passwords do not match', 'error')
-            close_db(db, cur)
+            db.close_db()
             return render_template('signup.html', username=username, email=email, name=name)
 
         cur.callproc('createUser', (username, email, password, name))
@@ -70,12 +62,11 @@ def signup():
             break
 
         if result:
-            close_db(db, cur)
+            db.close_db()
             flash(result.fetchall()[0][0], 'error')
             return render_template('signup.html', username=username, email=email, name=name)
 
-        db.commit()
-        close_db(db, cur)
+        db.close_db()
         return redirect(url_for('index'))
 
 
@@ -87,7 +78,7 @@ def login():
         else:
             return redirect(url_for('index'))
     elif request.method == 'POST':
-        (db, cur) = init_db()
+        db = mysqlDB()
         username = request.form['username']
         password = request.form['password']
         parameters = [username, 0, '']
@@ -144,8 +135,7 @@ def file_upload():
                 request.files[f].save(os.path.join(file_path))
                 cur.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s)', (script_name, description, subject, user_id))
 
-        db.commit()
-        close_db(db, cur)
+        db.close_db()
         return 'Upload sucessful'
 
 
