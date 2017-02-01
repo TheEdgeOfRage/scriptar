@@ -13,11 +13,9 @@ Scripts for communicating with the database. Separated into a new file for acces
 import mysql.connector
 
 class db:
-    con = None
-    cur = None
     def __init__(self):
-        con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
-        cur = con.cursor()
+        self.con = mysql.connector.connect(user='scriptar', password='vysrCuuxeJhixgBb', database='scriptar', host='localhost')
+        self.cur = con.cursor()
 
     def callproc(procedure, *data):
         return self.cur.callproc(procedure, data)
@@ -26,7 +24,7 @@ class db:
         return self.cur.execute(query, data)
 
     def close_db():
-        con.commit()
-        cur.close()
-        con.close()
+        self.con.commit()
+        self.cur.close()
+        self.con.close()
 
