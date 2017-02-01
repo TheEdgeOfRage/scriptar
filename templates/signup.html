@@ -5,45 +5,68 @@
 {% block content %}
 	<div class="jumbotron">
 		<h2>Sign up</h2>
-		<form class="form-horizontal" method="post">
-			<fieldset>
-				<div class="form-group">
-					<label for="inputUsername" class="col-lg-2 control-label">Username</label>
-					<div class="col-lg-8">
-						<input class="form-control" id="inputUsername" placeholder="Username" type="text" name="username" value="{% if username %}{{username}}{% endif %}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail" class="col-lg-2 control-label">Email</label>
-					<div class="col-lg-8">
-						<input class="form-control" id="inputEmail" placeholder="Email" type="email" name="email" value="{% if email %}{{email}}{% endif %}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword" class="col-lg-2 control-label">Password</label>
-					<div class="col-lg-8">
-						<input class="form-control" id="inputPassword" placeholder="Password" type="password" name="password">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword_con" class="col-lg-2 control-label">Confirm Password</label>
-					<div class="col-lg-8">
-						<input class="form-control" id="inputPassword_con" placeholder="Password confirmation" type="password" name="password_con">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputName" class="col-lg-2 control-label">Name</label>
-					<div class="col-lg-8">
-						<input class="form-control" id="inputName" placeholder="Name" type="text" name="Name" value="{% if name %}{{name}}{% endif %}">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-lg-8 col-lg-offset-2">
-						<input type="submit" class="btn btn-primary" value="Submit">
-						<input type="reset" class="btn btn-default" value="Cancel">
-					</div>
-				</div>
-			</fieldset>
+		<!--<form class="form-horizontal" method="post">-->
+		<!--<fieldset>-->
+		<!--<div class="form-group">-->
+		<!--<label for="inputUsername" class="col-lg-2 control-label">Username</label>-->
+		<!--<div class="col-lg-8">-->
+		<!--<input class="form-control" id="inputUsername" placeholder="Username" type="text" name="username" value="{% if username %}{{username}}{% endif %}">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+		<!--<label for="inputEmail" class="col-lg-2 control-label">Email</label>-->
+		<!--<div class="col-lg-8">-->
+		<!--<input class="form-control" id="inputEmail" placeholder="Email" type="email" name="email" value="{% if email %}{{email}}{% endif %}">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+		<!--<label for="inputPassword" class="col-lg-2 control-label">Password</label>-->
+		<!--<div class="col-lg-8">-->
+		<!--<input class="form-control" id="inputPassword" placeholder="Password" type="password" name="password">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+		<!--<label for="inputPassword_con" class="col-lg-2 control-label">Confirm Password</label>-->
+		<!--<div class="col-lg-8">-->
+		<!--<input class="form-control" id="inputPassword_con" placeholder="Password confirmation" type="password" name="password_con">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+		<!--<label for="inputName" class="col-lg-2 control-label">Name</label>-->
+		<!--<div class="col-lg-8">-->
+		<!--<input class="form-control" id="inputName" placeholder="Name" type="text" name="Name" value="{% if name %}{{name}}{% endif %}">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="form-group">-->
+		<!--<div class="col-lg-8 col-lg-offset-2">-->
+		<!--<input type="submit" class="btn btn-primary" value="Submit">-->
+		<!--<input type="reset" class="btn btn-default" value="Cancel">-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</fieldset>-->
+		<!--</form>-->
+		<form>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" class="form-control" id="username" name="username">
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" name="email">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="password">
+			</div>
+			<div class="form-group">
+				<label for="pwd_con">Confirm password:</label>
+				<input type="password" class="form-control" id="pwd_con" name="password_con">
+			</div>
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" class="form-control" id="name" name="name">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 
 		{% with messages = get_flashed_messages(with_categories=true) %}
