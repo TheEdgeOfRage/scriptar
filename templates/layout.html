@@ -1,5 +1,5 @@
-{% from "macros.html" import nav_link with context %}
-{% from "macros.html" import drop_link with context %}
+{% from "macros.html" import * with context %}
+{# {% from "macros.html" import drop_link with context %} #}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,8 +21,8 @@
 							{{ nav_link('login', 'Log in') }}
 							{{ nav_link('signup', 'Sign up') }}
 						{% else %}
-							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button" id="profile_menu" data-toggle="dropdown">Profile</button>
+							<li><div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="profile_menu" data-toggle="dropdown">Profile<span class="caret"></span></button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="profile_menu">
 									{{ drop_link('profile_app.profile', 'Profile') }}
 									{{ drop_link('file_upload', 'Upload') }}
@@ -33,7 +33,7 @@
 									<!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>-->
 									<!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>-->
 								</ul>
-							</div>
+							</div></li>
 						{% endif %}
 					</ul>
 				</nav>
