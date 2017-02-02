@@ -136,7 +136,7 @@ def file_upload():
             script_link = request.form['script_link'].strip()
             app.logger.debug(script_link)
             file_name = script_link.rsplit('/', 1)[1].lower()
-            urllib.urlretrieve(script_link, ''.join([file_path_base, "/", file_name]))
+            urllib.request.urlretrieve(script_link, ''.join([file_path_base, "/", file_name]))
 
 
         #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
