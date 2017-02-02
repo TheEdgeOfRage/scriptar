@@ -115,14 +115,11 @@ def file_upload():
     elif request.method == 'POST':
         db = mysqlDB()
 
-        app.logger.debug(request.form)
         # subject = request.form['subject']
         user_id = session['user_id']
         subject = '1'
         script_name = request.form['script_name'].strip()
         description = request.form['description'].strip()
-        app.logger.debug(script_name)
-        app.logger.debug(description)
 
         db.execute('INSERT INTO Scripts (name, description, Subject_ID, User_ID) VALUES ("%s", "%s", %s, %s);' % (script_name, description, subject, user_id))
 
@@ -134,16 +131,9 @@ def file_upload():
 
         if 'script_link' in request.form:
             script_link = request.form['script_link'].strip()
-            app.logger.debug(script_link)
             file_name = script_link.rsplit('/', 1)[1].lower()
             urllib.request.urlretrieve(script_link, ''.join([file_path_base, "/", file_name]))
 
-
-        #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
-        #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
-        #call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
-
-        app.logger.debug(request.files)
         for f in request.files:
             if request.files[f].filename != '' and f:
                 filename = secure_filename(request.files[f].filename)
