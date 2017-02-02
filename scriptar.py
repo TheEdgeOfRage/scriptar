@@ -136,7 +136,7 @@ def file_upload():
         # identican poziv kod mene na kompu radi
         #/srv/http/scriptar/static/uploads/
 
-        urllib.request.urlretrieve('https://i.imgur.com/bGMuppJ.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
+        urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
         #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
         #call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
 
