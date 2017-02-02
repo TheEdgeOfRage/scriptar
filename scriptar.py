@@ -134,7 +134,7 @@ def file_upload():
 
 
 #        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/file_from_link.png')
-        call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png']))
+        call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
 
         for f in request.files:
             if request.files[f].filename != '' and f:
