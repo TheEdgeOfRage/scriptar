@@ -84,10 +84,12 @@ def login():
         user_id = result[1]
         password_db = result[2]
 
-        app.logger.debug(remember)
-
         if user_id != None:
             if argon2.verify(password, password_db):
+                if remember == 'on':
+                    session.permanent = True
+                else:
+                    session.permanent = False
                 session['user_id'] = user_id
                 return redirect(url_for('index'))
             else:
