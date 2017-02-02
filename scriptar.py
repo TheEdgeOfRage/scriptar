@@ -16,6 +16,7 @@ from functools import wraps
 from flask import Flask, request, session, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
+import urllib
 
 from db import db as mysqlDB
 from profile import profile_app
@@ -127,6 +128,9 @@ def file_upload():
 
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', str(lastid)])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
+
+        if script_link in request.form:
+            urllib.urlretrieve (request.form['script_link'], ''.join([file_path_base, "file_from_link.mp3"])
 
         for f in request.files:
             if request.files[f].filename != '' and f:
