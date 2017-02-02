@@ -130,7 +130,7 @@ def file_upload():
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
         if script_link in request.form:
-            urllib.urlretrieve (request.form['script_link'], ''.join([file_path_base, "file_from_link.mp3"])
+            urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "file_from_link.mp3"]))
 
         for f in request.files:
             if request.files[f].filename != '' and f:
