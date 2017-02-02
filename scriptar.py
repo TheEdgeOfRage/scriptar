@@ -88,6 +88,7 @@ def login():
             if argon2.verify(password, password_db):
                 if remember == 'on':
                     session.permanent = True
+                    app.logger.info('session permanent')
                 else:
                     session.permanent = False
                 session['user_id'] = user_id

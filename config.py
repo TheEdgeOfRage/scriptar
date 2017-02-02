@@ -19,7 +19,7 @@ class Config(object):
     MYSQL_DATABASE_PASSWORD = 'vysrCuuxeJhixgBb'
     MYSQL_DATABASE_DB = 'scriptar'
     MYSQL_DATABASE_HOST = 'localhost'
-    PERMANENT_SESSION_LIFETIME = timedelta(days=365000)
+    # PERMANENT_SESSION_LIFETIME = timedelta(days=365000)
 
 
 class ProductionConfig(Config):
