@@ -129,8 +129,12 @@ def file_upload():
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', str(lastid)])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
-        if 'script_link' in request.form:
-            urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
+       # if 'script_link' in request.form:
+      #      urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
+
+
+        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_path_base, "/file_from_link.png"]))
+
 
         for f in request.files:
             if request.files[f].filename != '' and f:
