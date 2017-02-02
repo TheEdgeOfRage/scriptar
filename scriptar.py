@@ -11,8 +11,6 @@
 """
 
 import os
-# import string
-# import random
 
 from functools import wraps
 from flask import Flask, request, session, render_template, redirect, url_for, flash
@@ -80,10 +78,13 @@ def login():
         db = mysqlDB()
         username = request.form['username']
         password = request.form['password']
+        remember = request.form['remember']
         parameters = [username, 0, '']
         result = db.callproc('getUser', parameters)
         user_id = result[1]
         password_db = result[2]
+
+        app.logger.debug(remember)
 
         if user_id != None:
             if argon2.verify(password, password_db):

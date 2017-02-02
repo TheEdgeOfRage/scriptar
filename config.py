@@ -7,8 +7,8 @@
 # Distributed under terms of the MIT license.
 
 import os
+from datetime import timedelta
 basedir = os.path.abspath(os.path.dirname(__file__))
-
 
 class Config(object):
     DEBUG = False
@@ -19,6 +19,7 @@ class Config(object):
     MYSQL_DATABASE_PASSWORD = 'vysrCuuxeJhixgBb'
     MYSQL_DATABASE_DB = 'scriptar'
     MYSQL_DATABASE_HOST = 'localhost'
+    PERMANENT_SESSION_LIFETIME = timedelta(days=999999999)
 
 
 class ProductionConfig(Config):
