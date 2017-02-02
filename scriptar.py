@@ -133,8 +133,8 @@ def file_upload():
        # if 'script_link' in request.form:
       #      urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
 
-
-        urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
+        urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
+#        urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
         #call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
 
         for f in request.files:
