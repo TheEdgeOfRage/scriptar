@@ -129,7 +129,7 @@ def file_upload():
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', str(lastid)])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
-        if script_link in request.form:
+        if 'script_link' in request.form:
             urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
 
         for f in request.files:
