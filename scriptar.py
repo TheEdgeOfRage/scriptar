@@ -130,13 +130,12 @@ def file_upload():
         file_path_base = ''.join(['/srv/http/scriptar/static/uploads/', str(lastid)])
         os.makedirs(file_path_base, mode=0o775, exist_ok=True)
 
-        #if 'script_link' in request.form:
-        #    urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
+        if 'script_link' in request.form:
+            file_name = request.form['script_link'].rsplit('/', 1)[1].lower()
+            urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/", file_name]))
 
-        # identican poziv kod mene na kompu radi
-        #/srv/http/scriptar/static/uploads/
 
-        urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
+        #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/18/asdf.png')
         #urllib.request.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
         #call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
 
