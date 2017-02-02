@@ -17,6 +17,7 @@ from flask import Flask, request, session, render_template, redirect, url_for, f
 from werkzeug.utils import secure_filename
 from passlib.hash import argon2
 from subprocess import call
+import urllib
 
 from db import db as mysqlDB
 from profile import profile_app
@@ -133,8 +134,8 @@ def file_upload():
       #      urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
 
 
-#        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', '/srv/http/scriptar/static/uploads/file_from_link.png')
-        call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
+        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_base_path, '/file_from_link.png']))
+        #call(['curl', 'http://i.imgur.com/qfKL82l.png', '>', ''.join([file_base_path, '/file_from_link.png'])])
 
         for f in request.files:
             if request.files[f].filename != '' and f:
