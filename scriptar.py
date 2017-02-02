@@ -133,7 +133,7 @@ def file_upload():
       #      urllib.urlretrieve(request.form['script_link'], ''.join([file_path_base, "/file_from_link.mp3"]))
 
 
-        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', ''.join([file_path_base, "/file_from_link.png"]))
+        urllib.urlretrieve('http://i.imgur.com/qfKL82l.png', 'file_from_link.png')
 
 
         for f in request.files:
