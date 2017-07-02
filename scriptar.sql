@@ -37,7 +37,7 @@ UNIQUE INDEX `user_ID_UNIQUE` (`ID` ASC));
 -- -----------------------------------------------------
 -- Table `scriptar`.`Subject`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scriptar`.`Subject` (
+CREATE TABLE IF NOT EXISTS `scriptar`.`Subjects` (
 `ID` INT NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL DEFAULT '',
 PRIMARY KEY (`ID`),
@@ -46,9 +46,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scriptar`.`Script`
+-- Table `scriptar`.`Scripts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scriptar`.`Script` (
+CREATE TABLE IF NOT EXISTS `scriptar`.`Scripts` (
 `ID` INT NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL DEFAULT '',
 `link` VARCHAR(500) NULL DEFAULT NULL,
@@ -67,16 +67,16 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION,
 CONSTRAINT `fk_Script_Subject1`
 FOREIGN KEY (`Subject_ID`)
-REFERENCES `scriptar`.`Subject` (`ID`)
+REFERENCES `scriptar`.`Subjects` (`ID`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `scriptar`.`Review`
+-- Table `scriptar`.`Reviews`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scriptar`.`Review` (
+CREATE TABLE IF NOT EXISTS `scriptar`.`Reviews` (
 `ID` INT NOT NULL AUTO_INCREMENT,
 `rating` INT NOT NULL,
 `comment` BLOB NULL,
@@ -89,7 +89,7 @@ INDEX `fk_Review_Script1_idx` (`Script_ID` ASC),
 INDEX `fk_Review_User1_idx` (`User_ID` ASC),
 CONSTRAINT `fk_Review_Script1`
 FOREIGN KEY (`Script_ID`)
-REFERENCES `scriptar`.`Script` (`ID`)
+REFERENCES `scriptar`.`Scripts` (`ID`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION,
 CONSTRAINT `fk_Review_User1`
@@ -103,7 +103,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `scriptar`.`Course`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scriptar`.`Course` (
+CREATE TABLE IF NOT EXISTS `scriptar`.`Courses` (
 `ID` INT NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL DEFAULT '',
 `faculty` VARCHAR(100) NOT NULL DEFAULT '',
@@ -125,12 +125,12 @@ INDEX `fk_Course_has_Subject_Subject1_idx` (`Subject_ID` ASC),
 INDEX `fk_Course_has_Subject_Course1_idx` (`Course_ID` ASC),
 CONSTRAINT `fk_Course_has_Subject_Course1`
 FOREIGN KEY (`Course_ID`)
-REFERENCES `scriptar`.`Course` (`ID`)
+REFERENCES `scriptar`.`Courses` (`ID`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION,
 CONSTRAINT `fk_Course_has_Subject_Subject1`
 FOREIGN KEY (`Subject_ID`)
-REFERENCES `scriptar`.`Subject` (`ID`)
+REFERENCES `scriptar`.`Subjects` (`ID`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION)
 ENGINE = InnoDB;
