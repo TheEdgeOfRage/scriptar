@@ -22,9 +22,11 @@ import urllib.request
 from db import db as mysqlDB
 from profile import profile_app
 from decorators import login_required
+from config import Config
 
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
+#  app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(Config)
 
 app.register_blueprint(profile_app, url_prefix='/profile')
 
