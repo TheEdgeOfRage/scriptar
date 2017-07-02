@@ -25,8 +25,7 @@ from decorators import login_required
 from config import Config
 
 app = Flask(__name__)
-#  app.config.from_object(os.environ['APP_SETTINGS'])
-app.config.from_object(Config)
+app.config.from_object(os.environ['APP_SETTINGS'])
 
 app.register_blueprint(profile_app, url_prefix='/profile')
 
